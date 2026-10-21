@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BCO PROJECTS</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+            <div class="logo-left"></div>
+            <div class="logo-right"></div>
+        </div>
+
+        <div class="title">
+            BCO PROJECTS
+        </div>
+
+        <div class="header-buttons">
+
+            <button
+                id="refreshBtn"
+                class="header-button refresh-button"
+                title="Refresh">
+                ↻
+            </button>
+
+            <button
+                id="addBtn"
+                class="header-button add-button"
+                title="Add New Project">
+                +
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         PROJECT BOARD
+         ========================= -->
+
+    <main>
+
+        <section class="board">
+
+            <!-- =====================
+                 PLANNING
+                 ===================== -->
+
+            <div class="column">
+
+                <div class="column-title planning-title">
+                    PLANNING
+                </div>
+
+                <div
+                    id="planning"
+                    class="cards-container"
+                    data-status="Planning">
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================
+                 IN PROGRESS
+                 ===================== -->
+
+            <div class="column">
+
+                <div class="column-title progress-title">
+                    IN - PROGRESS
+                </div>
+
+                <div
+                    id="in-progress"
+                    class="cards-container"
+                    data-status="In - Progress">
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================
+                 COMPLETED
+                 ===================== -->
+
+            <div class="column">
+
+                <div class="column-title completed-title">
+                    COMPLETED
+                </div>
+
+                <div
+                    id="completed"
+                    class="cards-container"
+                    data-status="Completed">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             DATA TABLE
+             ========================= -->
+
+        <section class="table-wrapper">
+
+            <table class="project-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Project Name</th>
+
+                        <th>Owner</th>
+
+                        <th>Status</th>
+
+                        <th>Start Date</th>
+
+                        <th>End Date</th>
+
+                        <th>Assigned Resource</th>
+
+                        <th>Comments</th>
+
+                    </tr>
+
+
+                    <!-- FILTER ROW -->
+
+                    <tr class="filter-row">
+
+                        <th>
+                            <input
+                                type="text"
+                                class="filter-input"
+                                data-filter="name"
+                                placeholder="Filter...">
+                        </th>
+
+                        <th>
+                            <input
+                                type="text"
+                                class="filter-input"
+                                data-filter="owner"
+                                placeholder="Filter...">
+                        </th>
+
+                        <th>
+                            <input
+                                type="text"
+                                class="filter-input"
+                                data-filter="status"
+                                placeholder="Filter...">
+                        </th>
+
+                        <th></th>
+
+                        <th></th>
+
+                        <th>
+                            <input
+                                type="text"
+                                class="filter-input"
+                                data-filter="resource"
+                                placeholder="Filter...">
+                        </th>
+
+                        <th>
+                            <input
+                                type="text"
+                                class="filter-input"
+                                data-filter="comments"
+                                placeholder="Filter...">
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="projectTableBody">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         ADD / EDIT MODAL
+         ========================= -->
+
+    <div
+        id="modalOverlay"
+        class="modal-overlay">
+
+        <div class="modal">
+
+            <h2 id="modalTitle">
+                Add New Project
+            </h2>
+
+
+            <!-- Hidden Project ID -->
+
+            <input
+                type="hidden"
+                id="projectId">
+
+
+            <!-- Project Name -->
+
+            <div class="form-group">
+
+                <label for="projectName">
+                    Project Name
+                </label>
+
+                <input
+                    type="text"
+                    id="projectName"
+                    placeholder="Enter project name">
+
+            </div>
+
+
+            <!-- Owner -->
+
+            <div class="form-group">
+
+                <label for="projectOwner">
+                    Owner
+                </label>
+
+                <input
+                    type="text"
+                    id="projectOwner"
+                    placeholder="Enter owner">
+
+            </div>
+
+
+            <!-- Status -->
+
+            <div class="form-group">
+
+                <label for="projectStatus">
+                    Status
+                </label>
+
+                <select id="projectStatus">
+
+                    <option value="Planning">
+                        Planning
+                    </option>
+
+                    <option value="In - Progress">
+                        In - Progress
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Assigned Resource -->
+
+            <div class="form-group">
+
+                <label for="projectResource">
+                    Assigned Resource
+                </label>
+
+                <input
+                    type="text"
+                    id="projectResource"
+                    placeholder="Enter resource">
+
+            </div>
+
+
+            <!-- Comments -->
+
+            <div class="form-group">
+
+                <label for="projectComments">
+                    Comments
+                </label>
+
+                <textarea
+                    id="projectComments"
+                    placeholder="Enter comments">
+                </textarea>
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="modal-buttons">
+
+                <button
+                    id="cancelBtn"
+                    class="cancel-button">
+                    Cancel
+                </button>
+
+                <button
+                    id="saveBtn"
+                    class="save-button">
+                    Save
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

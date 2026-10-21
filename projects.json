@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "name": "Staff Portal",
+        "owner": "Navneet",
+        "status": "Planning",
+        "startDate": "",
+        "endDate": "",
+        "resource": "Naveen",
+        "comments": ""
+    },
+    {
+        "id": 2,
+        "name": "R & R Dashboard",
+        "owner": "Saurabh",
+        "status": "Planning",
+        "startDate": "",
+        "endDate": "",
+        "resource": "Puja",
+        "comments": ""
+    },
+    {
+        "id": 3,
+        "name": "Prime Tool Enhancement",
+        "owner": "Sushovan",
+        "status": "Planning",
+        "startDate": "",
+        "endDate": "",
+        "resource": "Naveen",
+        "comments": ""
+    },
+    {
+        "id": 4,
+        "name": "PCF Enhancement",
+        "owner": "Sushovan",
+        "status": "In - Progress",
+        "startDate": "12-Aug",
+        "endDate": "16-Aug",
+        "resource": "Naveen",
+        "comments": ""
+    },
+    {
+        "id": 5,
+        "name": "Overdue Reporting Automation",
+        "owner": "Shambo",
+        "status": "Completed",
+        "startDate": "01-Aug",
+        "endDate": "10-Aug",
+        "resource": "Naveen",
+        "comments": ""
+    }
+]
