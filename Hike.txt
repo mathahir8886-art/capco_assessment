@@ -1,0 +1,121 @@
+Option Explicit
+
+Sub CalculateHike()
+
+    Dim wsHike As Worksheet
+    Dim wsRules As Worksheet
+    Dim wsLists As Worksheet
+
+    Dim lastRow As Long
+    Dim lastCityRow As Long
+    Dim i As Long
+
+    Dim city As String
+    Dim experience As String
+    Dim gender As String
+    Dim gcb As Long
+    Dim hikePercent As Double
+
+    '--------------------------------------------
+    ' Set worksheets
+    '--------------------------------------------
+    Set wsHike = ThisWorkbook.Worksheets("Hike")
+    Set wsRules = ThisWorkbook.Worksheets("Rules")
+    Set wsLists = ThisWorkbook.Worksheets("Lists")
+
+    '--------------------------------------------
+    ' Find last rows
+    '--------------------------------------------
+    lastRow = wsHike.Cells(wsHike.Rows.Count, "A").End(xlUp).Row
+
+    lastCityRow = wsLists.Cells(wsLists.Rows.Count, "A").End(xlUp).Row
+
+    '--------------------------------------------
+    ' Loop through employees
+    '--------------------------------------------
+    For i = 2 To lastRow
+
+        hikePercent = 0
+
+        city = Trim(wsHike.Cells(i, "C").Value)
+
+        experience = Trim(wsHike.Cells(i, "E").Value)
+
+        gender = Trim(wsHike.Cells(i, "G").Value)
+
+        If IsNumeric(wsHike.Cells(i, "D").Value) Then
+            gcb = CLng(wsHike.Cells(i, "D").Value)
+        Else
+            gcb = 0
+        End If
+
+        '--------------------------------------------
+        ' Rule 1 - Metro City
+        '--------------------------------------------
+        If Application.WorksheetFunction.CountIf( _
+            wsLists.Range("A2:A" & lastCityRow), city) > 0 Then
+
+            hikePercent = hikePercent + wsRules.Range("B2").Value
+
+        End If
+
+        '--------------------------------------------
+        ' Rule 2 - GCB and Experience
+        '--------------------------------------------
+        Select Case gcb
+
+            Case 5, 6
+
+                If StrComp(experience, "Experienced", vbTextCompare) = 0 Then
+
+                    hikePercent = hikePercent + wsRules.Range("B3").Value
+
+                ElseIf StrComp(experience, "Fresher", vbTextCompare) = 0 Then
+
+                    hikePercent = hikePercent + wsRules.Range("B4").Value
+
+                End If
+
+            Case 7
+
+                If StrComp(experience, "Experienced", vbTextCompare) = 0 Then
+
+                    hikePercent = hikePercent + wsRules.Range("B5").Value
+
+                ElseIf StrComp(experience, "Fresher", vbTextCompare) = 0 Then
+
+                    hikePercent = hikePercent + wsRules.Range("B6").Value
+
+                End If
+
+        End Select
+
+        '--------------------------------------------
+        ' Rule 3 - Gender
+        '--------------------------------------------
+        If StrComp(gender, "Female", vbTextCompare) = 0 Then
+
+            hikePercent = hikePercent + wsRules.Range("B8").Value
+
+        ElseIf StrComp(gender, "Male", vbTextCompare) = 0 Then
+
+            hikePercent = hikePercent + wsRules.Range("B7").Value
+
+        End If
+
+        '--------------------------------------------
+        ' Write result
+        '--------------------------------------------
+        wsHike.Cells(i, "F").Value = hikePercent
+
+        wsHike.Cells(i, "F").NumberFormat = "0.00%"
+
+    Next i
+
+    MsgBox "Hike percentage calculated successfully for " & _
+           (lastRow - 1) & " employees.", _
+           vbInformation, "Hike Calculator"
+
+End Sub
+
+
